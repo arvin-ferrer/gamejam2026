@@ -8,49 +8,59 @@ public class DialogueManager : MonoBehaviour
     public TextMeshProUGUI textDisplay;
     public float typingSpeed = 0.05f;
 
+    private string[] currentStory;
+    private int currentIndex = 0;
+
     void Start()
     {
-        if (dialogueBox != null)
-        {
-            dialogueBox.SetActive(false);
-        }
+        if (dialogueBox != null) dialogueBox.SetActive(false);
     }
-        void Update()
-        {
-            if (dialogueBox.activeSelf)
-            {
-                if (Input.GetKeyDown(KeyCode.Space))
-                {
-                    CloseDialogue();
-                }
-            }
-        }
 
-    public void ShowMemory(string message)
+    // UPDATED: This now accepts string[] (the list of sentences)
+    public void ShowMemory(string[] storyLines)
     {
         if (dialogueBox != null)
         {
+            currentStory = storyLines;
+            currentIndex = 0;
             dialogueBox.SetActive(true);
             
             StopAllCoroutines(); 
-            StartCoroutine(TypeMessage(message));
+            StartCoroutine(TypeMessage(currentStory[currentIndex]));
             
             Time.timeScale = 0f; // Freeze game
-            Debug.Log("Game Paused for Dialogue.");
         }
     }
+
+    void Update()
+    {
+        // Press Space to go to the next line of the story
+        if (dialogueBox.activeSelf && Input.GetKeyDown(KeyCode.Space))
+        {
+            if (textDisplay.text == currentStory[currentIndex]) 
+            {
+                NextLine();
+            }
+        }
+    }
+
+    void NextLine()
+    {
+        currentIndex++;
+        if (currentIndex < currentStory.Length)
+        {
+            StartCoroutine(TypeMessage(currentStory[currentIndex]));
+        }
+        else
+        {
+            CloseDialogue();
+        }
+    }
+
     public void CloseDialogue()
     {
-        if (dialogueBox != null)
-        {
-            dialogueBox.SetActive(false);
-            
-            textDisplay.text = "";
-
-            Time.timeScale = 1f; 
-            
-            Debug.Log("Dialogue Closed. Game Resumed.");
-        }
+        dialogueBox.SetActive(false);
+        Time.timeScale = 1f; // Unfreeze game
     }
 
     IEnumerator TypeMessage(string message)
@@ -58,9 +68,8 @@ public class DialogueManager : MonoBehaviour
         textDisplay.text = ""; 
         foreach (char letter in message.ToCharArray())
         {
-            textDisplay.text += letter;            
+            textDisplay.text += letter;
             yield return new WaitForSecondsRealtime(typingSpeed);
         }
     }
- 
-}   
+}
