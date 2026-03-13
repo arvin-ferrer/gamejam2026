@@ -32,7 +32,6 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
-        // Smooth RPG movement
         rb.linearVelocity = moveInput * moveSpeed;
     }
 }
