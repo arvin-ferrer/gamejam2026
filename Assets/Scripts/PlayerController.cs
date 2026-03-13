@@ -1,65 +1,38 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
-[RequireComponent(typeof(Rigidbody2D))]
 public class PlayerController : MonoBehaviour
 {
-    [Header("Movement Settings")]
-    [SerializeField] private float moveSpeed = 8f;
-    [SerializeField] private float jumpForce = 12f;
-
-    [Header("Detection Settings")]
-    [SerializeField] private Transform groundCheck;
-    [SerializeField] private float groundCheckRadius = 0.2f;
-    [SerializeField] private LayerMask groundLayer;
-
+    public float moveSpeed = 5f;
     private Rigidbody2D rb;
-    private bool isGrounded;
-    private float horizontalInput;
-    private bool facingRight = true;
+    private Vector2 moveInput;
 
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
-        
-        rb.gravityScale = 3f; 
-        rb.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
-        rb.interpolation = RigidbodyInterpolation2D.Interpolate;
+        rb.gravityScale = 0; // Ensure no gravity
+        rb.freezeRotation = true;
     }
 
     void Update()
     {
-        horizontalInput = Input.GetAxisRaw("Horizontal");
+        float x = 0;
+        float y = 0;
 
-        if (Input.GetButtonDown("Jump") && isGrounded)
+        if (Keyboard.current != null)
         {
-            rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
+            if (Keyboard.current.wKey.isPressed) y = 1;
+            if (Keyboard.current.sKey.isPressed) y = -1;
+            if (Keyboard.current.aKey.isPressed) x = -1;
+            if (Keyboard.current.dKey.isPressed) x = 1;
         }
 
-        if (horizontalInput > 0 && !facingRight) Flip();
-        else if (horizontalInput < 0 && facingRight) Flip();
+        moveInput = new Vector2(x, y).normalized;
     }
 
     void FixedUpdate()
     {
-        rb.linearVelocity = new Vector2(horizontalInput * moveSpeed, rb.linearVelocity.x);
-
-        isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
-    }
-
-    private void Flip()
-    {
-        facingRight = !facingRight;
-        Vector3 scaler = transform.localScale;
-        scaler.x *= -1;
-        transform.localScale = scaler;
-    }
-
-    private void OnDrawGizmosSelected()
-    {
-        if (groundCheck != null)
-        {
-            Gizmos.color = Color.red;
-            Gizmos.DrawWireSphere(groundCheck.position, groundCheckRadius);
-        }
+        // Smooth RPG movement
+        rb.linearVelocity = moveInput * moveSpeed;
     }
 }
