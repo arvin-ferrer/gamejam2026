@@ -56,7 +56,11 @@ public class DialogueManager : MonoBehaviour
             CloseDialogue();
         }
     }
-
+    public int GetCurrentIndex()
+    {
+        // Make sure 'currentIndex' is the name of your int variable in DialogueManager
+        return currentIndex; 
+    }
     public void CloseDialogue()
     {
         dialogueBox.SetActive(false);

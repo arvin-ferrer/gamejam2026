@@ -2,19 +2,26 @@ using UnityEngine;
 
 public class MemoryKey : MonoBehaviour
 {
-    // Type "Redd", "Khalil", etc. in the Inspector
-    public string colorID; 
+    public string keyName = "Redd"; // Ensure this matches the Lock's 'Required Key'
 
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
         {
-            // Record that we have this key
-            PlayerInventory.Instance.AddKey(colorID);
+            // 1. Add key to inventory
+            PlayerInventory.Instance.AddKey(keyName);
+
+            // 2. Trigger the "Obtained" message using existing DialogueManager
+            string[] message = { "Red Key Obtained!" };
+            DialogueManager dm = FindFirstObjectByType<DialogueManager>();
             
-            // Visual feedback
-            Debug.Log($"Picked up {colorID} key!");
-            Destroy(gameObject); 
+            if (dm != null)
+            {
+                dm.ShowMemory(message);
+            }
+
+            // 3. Remove key from the world
+            Destroy(gameObject);
         }
     }
 }
