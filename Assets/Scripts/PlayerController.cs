@@ -15,13 +15,12 @@ public class PlayerController : MonoBehaviour
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
-        rb.gravityScale = 0; // Ensure no gravity
+        rb.gravityScale = 0; 
         rb.freezeRotation = true;
     }
 
     void Update()
     {
-        // 1. Movement Input Polling
         float x = 0;
         float y = 0;
 
@@ -32,7 +31,6 @@ public class PlayerController : MonoBehaviour
             if (Keyboard.current.aKey.isPressed) x = -1;
             if (Keyboard.current.dKey.isPressed) x = 1;
 
-            // 2. Interaction Input Polling
             if (Keyboard.current.eKey.wasPressedThisFrame)
             {
                 PerformInteraction();
@@ -49,21 +47,17 @@ public class PlayerController : MonoBehaviour
 
     void PerformInteraction()
     {
-        // Search for objects on the Interactable layer within a circle around the player
         Collider2D hit = Physics2D.OverlapCircle(transform.position, interactRange, interactableLayer);
         
         if (hit != null)
         {
-            // Try to get the LockController from whatever we hit
             if (hit.TryGetComponent(out LockController lockObj))
             {
                 lockObj.Interact();
             }
-            // You can add more 'else if' checks here for other interactable types later
         }
     }
 
-    // Helper to see the interaction range in the Scene view
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.yellow;

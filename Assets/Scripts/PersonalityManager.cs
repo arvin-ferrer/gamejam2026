@@ -2,16 +2,15 @@ using UnityEngine;
 
 public class PersonalityManager : MonoBehaviour
 {
-    public SpriteRenderer playerSprite; // Drag the Square's SpriteRenderer here
+    public SpriteRenderer playerSprite; 
 
     [Header("Personality Colors")]
     public Color defaultColor = Color.white;
     public Color reddColor = Color.red;
-    // You can add KhalilColor, ElloColor, etc. later
+    // add KhalilColor, ElloColor, etc. later
 
     void Update()
     {
-        // 1. Check for Input (Using 1, 2, 3... for quick switching)
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             AttemptTransformation("Redd");
@@ -25,7 +24,6 @@ public class PersonalityManager : MonoBehaviour
 
     void AttemptTransformation(string name)
     {
-        // 2. Check the "Brain" (MemoryState) to see if this is unlocked yet
         if (name == "Redd" && MemoryState.Instance.reddUnlocked)
         {
             TransformTo(MemoryState.Personality.Redd);
@@ -40,7 +38,6 @@ public class PersonalityManager : MonoBehaviour
     {
         MemoryState.Instance.currentPersonality = newForm;
 
-        // 3. Update the Visuals
         switch (newForm)
         {
             case MemoryState.Personality.Redd:

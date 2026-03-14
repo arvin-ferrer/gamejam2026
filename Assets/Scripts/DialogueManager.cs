@@ -16,8 +16,7 @@ public class DialogueManager : MonoBehaviour
         if (dialogueBox != null) dialogueBox.SetActive(false);
     }
 
-    // UPDATED: This now accepts string[] (the list of sentences)
-    public void ShowMemory(string[] storyLines)
+     public void ShowMemory(string[] storyLines)
     {
         if (dialogueBox != null)
         {

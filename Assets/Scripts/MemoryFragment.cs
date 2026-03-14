@@ -4,7 +4,6 @@ public class MemoryFragment : MonoBehaviour
 {
     public string memoryName; // Set to "Redd" in Inspector
 
-    // PRECISE CHANGE: This is now called by the Lock/Keypad script
     public void CollectFragment()
     {
         UnlockSequence();
@@ -12,7 +11,6 @@ public class MemoryFragment : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        // This allows the player to "walk into" the fragment to finish the memory
         if (other.CompareTag("Player"))
         {
             CollectFragment();
@@ -33,11 +31,11 @@ public class MemoryFragment : MonoBehaviour
 
  void TriggerStory()
 {
-    Debug.Log("TriggerStory called. memoryName is: " + memoryName); // Check if name is right
+    Debug.Log("TriggerStory called. memoryName is: " + memoryName); 
 
     if (memoryName == "Redd")
     {
-        Debug.Log("Match found! Searching for DialogueManager..."); // Check if it enters the IF
+        Debug.Log("Match found! Searching for DialogueManager..."); 
         
         string[] story = {
             "I remember the forest... it was cold and quiet.",

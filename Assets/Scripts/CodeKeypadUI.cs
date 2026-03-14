@@ -10,10 +10,8 @@ public class CodeKeypadUI : MonoBehaviour
     private string currentEntry = "";
     private LockController targetLock;
 
-    // This is called by the Lock to tell the UI which door it belongs to
     public void SetTargetLock(LockController lockObj) => targetLock = lockObj;
 
-    // 1. Linked to Buttons 0-9
     public void PressButton(string value)
     {
         if (currentEntry.Length < 3) 
@@ -22,7 +20,6 @@ public class CodeKeypadUI : MonoBehaviour
             inputDisplay.text = currentEntry;
         }
 
-        // Automatic check once 3 digits are reached
         if (currentEntry.Length == 3)
         {
             CheckCode();
@@ -43,7 +40,6 @@ public class CodeKeypadUI : MonoBehaviour
         }
     }
 
-    // 2. Linked to the "X" Button
     public void DeleteLastNumber()
     {
         if (currentEntry.Length > 0)
@@ -53,7 +49,6 @@ public class CodeKeypadUI : MonoBehaviour
         }
     }
     
-    // 3. Linked to the "Close" Button
     public void CloseKeypad()
     {
         currentEntry = ""; 
