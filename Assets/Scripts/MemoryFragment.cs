@@ -31,6 +31,8 @@ public class MemoryFragment : MonoBehaviour
                     pm.TransformTo(MemoryState.Personality.Redd);
                 else if (memoryName == "Khalil") 
                     pm.TransformTo(MemoryState.Personality.Khalil);
+                else if (memoryName == "Ello")
+                    pm.TransformTo(MemoryState.Personality.Ello);
             }
 
             // Keep your Unity 6 MemoryManager logic here if needed
@@ -61,6 +63,14 @@ public class MemoryFragment : MonoBehaviour
             string[] story = {
                 "The maze... Khalil knew every turn.",
                 "He spoke of patience when I only felt panic."
+            };
+            dm.ShowMemory(story);
+        }
+        else if (memoryName == "Ello")
+        {
+            string[] story = {
+                "Ello...",
+                "A bright spark of joy."
             };
             dm.ShowMemory(story);
         }
