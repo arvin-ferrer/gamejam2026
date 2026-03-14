@@ -22,35 +22,48 @@ public class MemoryFragment : MonoBehaviour
             MemoryState.Instance.Unlock(memoryName);
             TriggerStory();
 
-            // Updated for Unity 6
+            // 1. Find the PersonalityManager on the Player
+            PersonalityManager pm = FindFirstObjectByType<PersonalityManager>();
+            if (pm != null)
+            {
+                // 2. Check the name and tell the manager to switch the color
+                if (memoryName == "Redd") 
+                    pm.TransformTo(MemoryState.Personality.Redd);
+                else if (memoryName == "Khalil") 
+                    pm.TransformTo(MemoryState.Personality.Khalil);
+            }
+
+            // Keep your Unity 6 MemoryManager logic here if needed
             MemoryManager mm = FindFirstObjectByType<MemoryManager>();
-            if (mm != null) mm.RestoreRedMemory();
+            if (mm != null && memoryName == "Redd") mm.RestoreRedMemory();
 
             Destroy(gameObject);
         }
-
- void TriggerStory()
-{
-    Debug.Log("TriggerStory called. memoryName is: " + memoryName); 
-
-    if (memoryName == "Redd")
+    void TriggerStory()
     {
-        Debug.Log("Match found! Searching for DialogueManager..."); 
-        
-        string[] story = {
-            "I remember the forest... it was cold and quiet.",
-            "Redd. He chose to walk beside me. I wasn't alone anymore."
-        };
-        
         DialogueManager dm = FindFirstObjectByType<DialogueManager>();
-        if (dm != null) 
+        if (dm == null) 
         {
+            Debug.LogError("DIALOGUE MANAGER NOT FOUND!");
+            return;
+        }
+
+        if (memoryName == "Redd")
+        {
+            string[] story = {
+                "I remember the forest... it was cold and quiet.",
+                "Redd. He chose to walk beside me."
+            };
             dm.ShowMemory(story);
         }
-        else 
+        else if (memoryName == "Khalil") // Add this block
         {
-            Debug.LogError("DIALOGUE MANAGER NOT FOUND IN SCENE!");
+            string[] story = {
+                "The maze... Khalil knew every turn.",
+                "He spoke of patience when I only felt panic."
+            };
+            dm.ShowMemory(story);
         }
-    }
+
 }
 }

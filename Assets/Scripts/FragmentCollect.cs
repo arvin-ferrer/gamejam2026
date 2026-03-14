@@ -6,15 +6,16 @@ public class FragmentCollect : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            ReddPush pushScript = other.GetComponent<ReddPush>();
+            // 1. Mark Redd as unlocked in the global state
+            MemoryState.Instance.reddUnlocked = true;
 
-            if (pushScript != null)
+            // 2. Automatically transform the player into Redd right now
+            PersonalityManager pm = other.GetComponent<PersonalityManager>();
+            if (pm != null)
             {
-                // Call the transformation function
-                pushScript.TransformToRedd();
+                pm.TransformTo(MemoryState.Personality.Redd);
             }
 
-            // You could add a particle effect here for the "Pop" of color!
             Destroy(gameObject);
         }
     }

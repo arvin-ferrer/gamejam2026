@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 3
   tags:
   - RedKey
+  - Pushable
   layers:
   - Default
   - TransparentFX

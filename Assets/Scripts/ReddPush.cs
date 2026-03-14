@@ -2,50 +2,43 @@ using UnityEngine;
 
 public class ReddPush : MonoBehaviour
 {
-    [Header("Status")]
-    public bool isRedd = false; // The master "Transformation" variable
-    public Color reddColor = Color.red; // The color he turns into
-    
-    [Header("Push Settings")]
     public float pushPower = 2.0f;
 
-    private SpriteRenderer sr;
-
-    void Start()
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        sr = GetComponent<SpriteRenderer>();
-    }
-
-    // This is the function the Fragment will call
-    public void TransformToRedd()
-    {
-        isRedd = true;
-        if (sr != null) sr.color = reddColor; // Turn the square Red!
-        Debug.Log("TRANSFORMED: Redd has regained his color and strength.");
-    }
-
-    private void OnCollisionStay2D(Collision2D collision)
-    {
-        // Only push if transformed!
-        if (!isRedd) return;
-
         if (collision.gameObject.CompareTag("Pushable"))
         {
-            Rigidbody2D rb = collision.collider.attachedRigidbody;
-            if (rb != null)
+            Rigidbody2D boulderRb = collision.collider.attachedRigidbody;
+
+            if (boulderRb != null)
             {
-                Vector2 forceDirection = (collision.gameObject.transform.position - transform.position).normalized;
-                rb.linearVelocity = forceDirection * pushPower;
+                // If we are REDD, make the boulder move
+                if (MemoryState.Instance.currentPersonality == MemoryState.Personality.Redd)
+                {
+                    boulderRb.bodyType = RigidbodyType2D.Dynamic;
+                }
+                else
+                {
+                    // If we are NONE, turn the boulder into a brick wall
+                    boulderRb.bodyType = RigidbodyType2D.Static;
+                }
             }
         }
     }
 
-    private void OnCollisionExit2D(Collision2D collision)
+    private void OnCollisionStay2D(Collision2D collision)
     {
+        // Only apply force if we are currently Redd
+        if (MemoryState.Instance.currentPersonality != MemoryState.Personality.Redd) return;
+
         if (collision.gameObject.CompareTag("Pushable"))
         {
             Rigidbody2D rb = collision.collider.attachedRigidbody;
-            if (rb != null) rb.linearVelocity = Vector2.zero;
+            if (rb != null && rb.bodyType == RigidbodyType2D.Dynamic)
+            {
+                Vector2 forceDirection = (collision.gameObject.transform.position - transform.position).normalized;
+                rb.linearVelocity = forceDirection * pushPower;
+            }
         }
     }
 }

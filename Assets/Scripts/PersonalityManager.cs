@@ -7,14 +7,15 @@ public class PersonalityManager : MonoBehaviour
     [Header("Personality Colors")]
     public Color defaultColor = Color.white;
     public Color reddColor = Color.red;
-    // add KhalilColor, ElloColor, etc. later
+    public Color khalilColor = Color.green; // Added Khalil
+    public Color elloColor = Color.yellow; // Example for future Ello
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            AttemptTransformation("Redd");
-        }
+        // Numeric keys for switching
+        if (Input.GetKeyDown(KeyCode.Alpha1)) AttemptTransformation("Redd");
+        if (Input.GetKeyDown(KeyCode.Alpha2)) AttemptTransformation("Khalil");
+        if (Input.GetKeyDown(KeyCode.Alpha3)) AttemptTransformation("Ello");
         
         if (Input.GetKeyDown(KeyCode.Alpha0))
         {
@@ -24,9 +25,21 @@ public class PersonalityManager : MonoBehaviour
 
     void AttemptTransformation(string name)
     {
-        if (name == "Redd" && MemoryState.Instance.reddUnlocked)
+        // We check the specific bool in MemoryState based on the string name
+        bool isUnlocked = false;
+
+        switch (name.ToLower())
         {
-            TransformTo(MemoryState.Personality.Redd);
+            case "redd": isUnlocked = MemoryState.Instance.reddUnlocked; break;
+            case "khalil": isUnlocked = MemoryState.Instance.khalilUnlocked; break;
+            case "ello": isUnlocked = MemoryState.Instance.elloUnlocked; break;
+        }
+
+        if (isUnlocked)
+        {
+            // Convert string to the Enum to call TransformTo
+            MemoryState.Personality targetEnum = (MemoryState.Personality)System.Enum.Parse(typeof(MemoryState.Personality), name, true);
+            TransformTo(targetEnum);
         }
         else
         {
@@ -38,10 +51,17 @@ public class PersonalityManager : MonoBehaviour
     {
         MemoryState.Instance.currentPersonality = newForm;
 
+        // Apply the visual changes based on the state
         switch (newForm)
         {
             case MemoryState.Personality.Redd:
                 playerSprite.color = reddColor;
+                break;
+            case MemoryState.Personality.Khalil:
+                playerSprite.color = khalilColor;
+                break;
+            case MemoryState.Personality.Ello:
+                playerSprite.color = elloColor;
                 break;
             case MemoryState.Personality.None:
                 playerSprite.color = defaultColor;
