@@ -62,14 +62,14 @@ public class DialogueManager : MonoBehaviour
         dialogueBox.SetActive(false);
         Time.timeScale = 1f; // Unfreeze game
     }
-
     IEnumerator TypeMessage(string message)
-    {
-        textDisplay.text = ""; 
-        foreach (char letter in message.ToCharArray())
         {
-            textDisplay.text += letter;
-            yield return new WaitForSecondsRealtime(typingSpeed);
+            textDisplay.text = ""; 
+            foreach (char letter in message.ToCharArray())
+            {
+                textDisplay.text += letter;
+                // Use Realtime so it types while Time.timeScale is 0
+                yield return new WaitForSecondsRealtime(typingSpeed); 
+            }
         }
-    }
 }

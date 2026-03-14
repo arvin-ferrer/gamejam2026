@@ -2,42 +2,57 @@ using UnityEngine;
 
 public class MemoryFragment : MonoBehaviour
 {
-    public string requiredColor; // Match this to the key's colorID
+    public string memoryName; // Set to "Redd" in Inspector
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    // PRECISE CHANGE: This is now called by the Lock/Keypad script
+    public void CollectFragment()
     {
-        if (collision.gameObject.CompareTag("Player"))
+        UnlockSequence();
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        // This allows the player to "walk into" the fragment to finish the memory
+        if (other.CompareTag("Player"))
         {
-            // Check if player has the right key in their inventory
-            if (PlayerInventory.Instance.HasKey(requiredColor))
-            {
-                UnlockSequence();
-            }
-            else
-            {
-                // Here we can trigger a small "Locked" text popup later
-                Debug.Log($"This memory is locked. You need the {requiredColor} key.");
-            }
+            CollectFragment();
         }
     }
 
     void UnlockSequence()
-    {
-        // 1. Tell the Brain the memory is officially restored
-        MemoryState.Instance.Unlock(requiredColor);
+        {
+            MemoryState.Instance.Unlock(memoryName);
+            TriggerStory();
 
-        // 2. Trigger the Dialogue (Using the Redd Story we wrote earlier)
-        string[] reddStory = {
+            // Updated for Unity 6
+            MemoryManager mm = FindFirstObjectByType<MemoryManager>();
+            if (mm != null) mm.RestoreRedMemory();
+
+            Destroy(gameObject);
+        }
+
+ void TriggerStory()
+{
+    Debug.Log("TriggerStory called. memoryName is: " + memoryName); // Check if name is right
+
+    if (memoryName == "Redd")
+    {
+        Debug.Log("Match found! Searching for DialogueManager..."); // Check if it enters the IF
+        
+        string[] story = {
             "I remember the forest... it was cold and quiet.",
             "Redd. He chose to walk beside me. I wasn't alone anymore."
         };
-        FindObjectOfType<DialogueManager>().ShowMemory(reddStory);
-
-        // 3. Restore the World Color
-        // This calls your existing MemoryManager to fade the saturation back in
-        FindObjectOfType<MemoryManager>().RestoreRedMemory();
-
-        // 4. Remove the lock from the world
-        Destroy(gameObject);
+        
+        DialogueManager dm = FindFirstObjectByType<DialogueManager>();
+        if (dm != null) 
+        {
+            dm.ShowMemory(story);
+        }
+        else 
+        {
+            Debug.LogError("DIALOGUE MANAGER NOT FOUND IN SCENE!");
+        }
     }
+}
 }
