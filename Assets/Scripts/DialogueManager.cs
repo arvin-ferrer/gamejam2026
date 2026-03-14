@@ -4,19 +4,29 @@ using System.Collections;
 
 public class DialogueManager : MonoBehaviour
 {
+    [Header("UI Objects")]
     public GameObject dialogueBox;
     public TextMeshProUGUI textDisplay;
+    
+    [Header("Prompts")]
+    public GameObject spacePrompt;    // The "[Space]" text inside the box
+    public GameObject interactPrompt; // The universal "Press [E]" text
+    
+    [Header("Settings")]
     public float typingSpeed = 0.05f;
 
     private string[] currentStory;
     private int currentIndex = 0;
+    private bool isTyping = false; // Prevents skipping while typing
 
     void Start()
     {
         if (dialogueBox != null) dialogueBox.SetActive(false);
+        if (spacePrompt != null) spacePrompt.SetActive(false);
+        if (interactPrompt != null) interactPrompt.SetActive(false);
     }
 
-     public void ShowMemory(string[] storyLines)
+    public void ShowMemory(string[] storyLines)
     {
         if (dialogueBox != null)
         {
@@ -24,22 +34,23 @@ public class DialogueManager : MonoBehaviour
             currentIndex = 0;
             dialogueBox.SetActive(true);
             
+            // Hide prompts when starting a new dialogue
+            if (interactPrompt != null) interactPrompt.SetActive(false);
+            if (spacePrompt != null) spacePrompt.SetActive(false);
+
             StopAllCoroutines(); 
             StartCoroutine(TypeMessage(currentStory[currentIndex]));
             
-            Time.timeScale = 0f; // Freeze game
+            Time.timeScale = 0f; 
         }
     }
 
     void Update()
     {
-        // Press Space to go to the next line of the story
-        if (dialogueBox.activeSelf && Input.GetKeyDown(KeyCode.Space))
+        // Only allow progression if the box is open and we aren't currently typing
+        if (dialogueBox.activeSelf && Input.GetKeyDown(KeyCode.Space) && !isTyping)
         {
-            if (textDisplay.text == currentStory[currentIndex]) 
-            {
-                NextLine();
-            }
+            NextLine();
         }
     }
 
@@ -48,6 +59,7 @@ public class DialogueManager : MonoBehaviour
         currentIndex++;
         if (currentIndex < currentStory.Length)
         {
+            if (spacePrompt != null) spacePrompt.SetActive(false); // Hide while typing next
             StartCoroutine(TypeMessage(currentStory[currentIndex]));
         }
         else
@@ -55,24 +67,39 @@ public class DialogueManager : MonoBehaviour
             CloseDialogue();
         }
     }
-    public int GetCurrentIndex()
-    {
-        // Make sure 'currentIndex' is the name of your int variable in DialogueManager
-        return currentIndex; 
-    }
+
     public void CloseDialogue()
     {
         dialogueBox.SetActive(false);
-        Time.timeScale = 1f; // Unfreeze game
+        if (spacePrompt != null) spacePrompt.SetActive(false);
+        Time.timeScale = 1f; 
     }
+
+    // Call this from scripts like 'ReadableNote' when player enters/exits trigger
+    public void ToggleInteractPrompt(bool show)
+    {
+        // Don't show the 'E' prompt if the dialogue box is already open
+        if (dialogueBox.activeSelf && show) return; 
+
+        if (interactPrompt != null) interactPrompt.SetActive(show);
+    }
+
+    public int GetCurrentIndex() => currentIndex;
+
     IEnumerator TypeMessage(string message)
+    {
+        isTyping = true;
+        textDisplay.text = ""; 
+        
+        foreach (char letter in message.ToCharArray())
         {
-            textDisplay.text = ""; 
-            foreach (char letter in message.ToCharArray())
-            {
-                textDisplay.text += letter;
-                // Use Realtime so it types while Time.timeScale is 0
-                yield return new WaitForSecondsRealtime(typingSpeed); 
-            }
+            textDisplay.text += letter;
+            yield return new WaitForSecondsRealtime(typingSpeed); 
         }
+
+        isTyping = false;
+        
+        // Show the Space prompt only when the full line is visible
+        if (spacePrompt != null) spacePrompt.SetActive(true);
+    }
 }
