@@ -27,18 +27,22 @@ public class ReddPush : MonoBehaviour
     }
 
     private void OnCollisionStay2D(Collision2D collision)
-    {
-        // Only apply force if we are currently Redd
-        if (MemoryState.Instance.currentPersonality != MemoryState.Personality.Redd) return;
-
-        if (collision.gameObject.CompareTag("Pushable"))
         {
-            Rigidbody2D rb = collision.collider.attachedRigidbody;
-            if (rb != null && rb.bodyType == RigidbodyType2D.Dynamic)
+            if (MemoryState.Instance.currentPersonality != MemoryState.Personality.Redd) return;
+
+            if (collision.gameObject.CompareTag("Pushable"))
             {
-                Vector2 forceDirection = (collision.gameObject.transform.position - transform.position).normalized;
-                rb.linearVelocity = forceDirection * pushPower;
+                Rigidbody2D rb = collision.collider.attachedRigidbody;
+                if (rb != null)
+                {
+                    // Wake the physics engine up manually
+                    rb.WakeUp(); 
+
+                    Vector2 forceDirection = (collision.gameObject.transform.position - transform.position).normalized;
+                    
+                    // Use linearVelocity for consistent speed, but AddForce for the initial 'nudge'
+                    rb.linearVelocity = forceDirection * pushPower;
+                }
             }
         }
-    }
 }
