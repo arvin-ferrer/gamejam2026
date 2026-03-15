@@ -26,7 +26,8 @@ public class MazeGate : MonoBehaviour
     void OpenGate()
     {
         Debug.Log("Khalil's path is open!");
-        // You can play a 'gate opening' sound here
+        SoundManager.Instance.PlaySFX("Gate Opening");
+        
         
         // Destroy the gate so the player can reach the Khalil Fragment
         Destroy(gameObject); 

@@ -16,6 +16,10 @@ public class FragmentCollect : MonoBehaviour
                 pm.TransformTo(MemoryState.Personality.Redd);
             }
 
+            // Play the fragment pickup sound
+            if (SoundManager.Instance != null)
+                SoundManager.Instance.PlaySFX("Fragment Aquired");
+
             Destroy(gameObject);
         }
     }

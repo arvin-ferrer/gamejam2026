@@ -24,6 +24,8 @@ public class LilaGate : MonoBehaviour
     void OpenGate()
     {
         Debug.Log("Lila's path is open!");
+        if (SoundManager.Instance != null)
+            SoundManager.Instance.PlaySFX("Gate Opening");
         // Destroy the gate so the player can proceed
         Destroy(gameObject); 
     }

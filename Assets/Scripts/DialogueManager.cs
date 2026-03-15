@@ -94,6 +94,7 @@ public class DialogueManager : MonoBehaviour
         foreach (char letter in message.ToCharArray())
         {
             textDisplay.text += letter;
+            SoundManager.Instance.PlaySFX("Dialogue");
             yield return new WaitForSecondsRealtime(typingSpeed); 
         }
 

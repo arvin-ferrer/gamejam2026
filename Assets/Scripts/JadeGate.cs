@@ -24,6 +24,8 @@ public class JadeGate : MonoBehaviour
     void OpenGate()
     {
         Debug.Log("Jade's path is open!");
+        if (SoundManager.Instance != null)
+            SoundManager.Instance.PlaySFX("Gate Opening");
         Destroy(gameObject);
     }
 }

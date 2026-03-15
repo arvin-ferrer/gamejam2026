@@ -26,7 +26,8 @@ public class ElloGate : MonoBehaviour
     void OpenGate()
     {
         Debug.Log("Ello's path is open!");
-        // You can play a 'gate opening' sound here
+        SoundManager.Instance.PlaySFX("Gate Opening");
+        
         
         // Destroy the gate so the player can proceed
         Destroy(gameObject); 
