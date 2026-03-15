@@ -3,24 +3,102 @@ using UnityEngine;
 public class PersonalityManager : MonoBehaviour
 {
     public SpriteRenderer playerSprite; 
+    private PlayerController playerController;
 
-    [Header("Personality Colors")]
-    public Color defaultColor = Color.white;
-    public Color reddColor = Color.red;
-    public Color khalilColor = Color.green;
-    public Color elloColor = Color.yellow;
-    public Color jadeColor = new Color(0f, 0.8f, 0.6f); // Teal/jade
-    public Color bleuColor = new Color(0.2f, 0.4f, 1f);  // Deep blue
-    public Color lilaColor = new Color(0.8f, 0.3f, 0.8f); // Purple/Lila
+    [Header("Main Character Sprites")]
+    public Sprite mainUp;
+    public Sprite mainDown;
+    public Sprite mainLeft;
+    public Sprite mainRight;
+
+    [Header("Redd Sprites")]
+    public Sprite reddUp;
+    public Sprite reddDown;
+    public Sprite reddLeft;
+    public Sprite reddRight;
+
+    [Header("Redd Walk Sprites")]
+    public Sprite[] reddWalkUp;
+    public Sprite[] reddWalkDown;
+    public Sprite[] reddWalkLeft;
+    public Sprite[] reddWalkRight;
+
+    [Header("Khalil Sprites")]
+    public Sprite khalilUp;
+    public Sprite khalilDown;
+    public Sprite khalilLeft;
+    public Sprite khalilRight;
+
+    [Header("Khalil Walk Sprites")]
+    public Sprite[] khalilWalkUp;
+    public Sprite[] khalilWalkDown;
+    public Sprite[] khalilWalkLeft;
+    public Sprite[] khalilWalkRight;
+
+    [Header("Ello Sprites")]
+    public Sprite elloUp;
+    public Sprite elloDown;
+    public Sprite elloLeft;
+    public Sprite elloRight;
+
+    [Header("Ello Walk Sprites")]
+    public Sprite[] elloWalkUp;
+    public Sprite[] elloWalkDown;
+    public Sprite[] elloWalkLeft;
+    public Sprite[] elloWalkRight;
+
+    [Header("Jade Sprites")]
+    public Sprite jadeUp;
+    public Sprite jadeDown;
+    public Sprite jadeLeft;
+    public Sprite jadeRight;
+
+    [Header("Jade Walk Sprites")]
+    public Sprite[] jadeWalkUp;
+    public Sprite[] jadeWalkDown;
+    public Sprite[] jadeWalkLeft;
+    public Sprite[] jadeWalkRight;
+
+    [Header("Bleu Sprites")]
+    public Sprite bleuUp;
+    public Sprite bleuDown;
+    public Sprite bleuLeft;
+    public Sprite bleuRight;
+
+    [Header("Bleu Walk Sprites")]
+    public Sprite[] bleuWalkUp;
+    public Sprite[] bleuWalkDown;
+    public Sprite[] bleuWalkLeft;
+    public Sprite[] bleuWalkRight;
+
+    [Header("Lila Sprites")]
+    public Sprite lilaUp;
+    public Sprite lilaDown;
+    public Sprite lilaLeft;
+    public Sprite lilaRight;
+
+    [Header("Lila Walk Sprites")]
+    public Sprite[] lilaWalkUp;
+    public Sprite[] lilaWalkDown;
+    public Sprite[] lilaWalkLeft;
+    public Sprite[] lilaWalkRight;
 
     [Header("Ello Shrink Settings")]
-    public float elloScale = 0.5f; // How small Ello becomes (50%)
+    public float elloScale = 0.5f;
     private Vector3 originalScale;
     private bool isShrunk = false;
 
     void Start()
     {
         originalScale = transform.localScale;
+        playerController = GetComponent<PlayerController>();
+
+        // Set default sprites on start
+        if (playerController != null)
+        {
+            playerController.spriteRenderer = playerSprite;
+            playerController.SetSprites(mainUp, mainDown, mainLeft, mainRight);
+        }
     }
 
     void Update()
@@ -41,7 +119,6 @@ public class PersonalityManager : MonoBehaviour
 
     void AttemptTransformation(string name)
     {
-        // We check the specific bool in MemoryState based on the string name
         if (MemoryState.Instance == null) return;
         bool isUnlocked = false;
 
@@ -57,7 +134,6 @@ public class PersonalityManager : MonoBehaviour
 
         if (isUnlocked)
         {
-            // Convert string to the Enum to call TransformTo
             MemoryState.Personality targetEnum = (MemoryState.Personality)System.Enum.Parse(typeof(MemoryState.Personality), name, true);
             TransformTo(targetEnum);
         }
@@ -72,7 +148,7 @@ public class PersonalityManager : MonoBehaviour
         if (MemoryState.Instance == null) return;
         MemoryState.Instance.currentPersonality = newForm;
 
-        // Handle Ello's shrink: shrink when becoming Ello, restore otherwise
+        // Handle Ello's shrink
         if (newForm == MemoryState.Personality.Ello)
         {
             transform.localScale = originalScale * elloScale;
@@ -84,32 +160,62 @@ public class PersonalityManager : MonoBehaviour
             isShrunk = false;
         }
 
-        // Apply the visual changes based on the state
+        // Swap sprites based on personality
         switch (newForm)
         {
             case MemoryState.Personality.Redd:
-                playerSprite.color = reddColor;
+                playerController.SetSprites(reddUp, reddDown, reddLeft, reddRight);
+                SetOrClearWalkSprites(reddWalkUp, reddWalkDown, reddWalkLeft, reddWalkRight);
                 break;
             case MemoryState.Personality.Khalil:
-                playerSprite.color = khalilColor;
+                playerController.SetSprites(khalilUp, khalilDown, khalilLeft, khalilRight);
+                SetOrClearWalkSprites(khalilWalkUp, khalilWalkDown, khalilWalkLeft, khalilWalkRight);
                 break;
             case MemoryState.Personality.Ello:
-                playerSprite.color = elloColor;
+                playerController.SetSprites(elloUp, elloDown, elloLeft, elloRight);
+                SetOrClearWalkSprites(elloWalkUp, elloWalkDown, elloWalkLeft, elloWalkRight);
                 break;
             case MemoryState.Personality.Jade:
-                playerSprite.color = jadeColor;
+                playerController.SetSprites(jadeUp, jadeDown, jadeLeft, jadeRight);
+                SetOrClearWalkSprites(jadeWalkUp, jadeWalkDown, jadeWalkLeft, jadeWalkRight);
                 break;
             case MemoryState.Personality.Bleu:
-                playerSprite.color = bleuColor;
+                playerController.SetSprites(bleuUp, bleuDown, bleuLeft, bleuRight);
+                SetOrClearWalkSprites(bleuWalkUp, bleuWalkDown, bleuWalkLeft, bleuWalkRight);
                 break;
             case MemoryState.Personality.Lila:
-                playerSprite.color = lilaColor;
+                playerController.SetSprites(lilaUp, lilaDown, lilaLeft, lilaRight);
+                SetOrClearWalkSprites(lilaWalkUp, lilaWalkDown, lilaWalkLeft, lilaWalkRight);
                 break;
             case MemoryState.Personality.None:
-                playerSprite.color = defaultColor;
+                playerController.SetSprites(mainUp, mainDown, mainLeft, mainRight);
+                playerController.RestoreMainWalkSprites();
                 break;
         }
+
+        // Reset color to white so sprites show their true colors
+        playerSprite.color = Color.white;
         
         Debug.Log($"Transformed into: {newForm}");
+    }
+
+    /// <summary>
+    /// Sets walk sprites if any are assigned, otherwise clears them (idle-only fallback).
+    /// </summary>
+    private void SetOrClearWalkSprites(Sprite[] up, Sprite[] down, Sprite[] left, Sprite[] right)
+    {
+        bool hasWalkSprites = (up != null && up.Length > 0) ||
+                              (down != null && down.Length > 0) ||
+                              (left != null && left.Length > 0) ||
+                              (right != null && right.Length > 0);
+
+        if (hasWalkSprites)
+        {
+            playerController.SetWalkSprites(up, down, left, right);
+        }
+        else
+        {
+            playerController.ClearWalkSprites();
+        }
     }
 }
