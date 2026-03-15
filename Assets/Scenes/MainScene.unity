@@ -68128,7 +68128,7 @@ Transform:
   m_GameObject: {fileID: 16486273}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -58.88, y: -31.03, z: 0}
+  m_LocalPosition: {x: 4.7, y: -44.9, z: 0}
   m_LocalScale: {x: 0.7, y: 0.7, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -68210,30 +68210,86 @@ MonoBehaviour:
   mainDown: {fileID: -2121374653, guid: ae2735c17aa4a405482660505f44f63c, type: 3}
   mainLeft: {fileID: -1674211731, guid: a5f49dead3b75786394adb684931cef8, type: 3}
   mainRight: {fileID: -252453576, guid: cae3b2be76c1448208cb6b34197792ca, type: 3}
-  reddUp: {fileID: 0}
-  reddDown: {fileID: 0}
-  reddLeft: {fileID: 0}
-  reddRight: {fileID: 0}
-  khalilUp: {fileID: 0}
-  khalilDown: {fileID: 0}
-  khalilLeft: {fileID: 0}
-  khalilRight: {fileID: 0}
+  reddUp: {fileID: 8902085308911056958, guid: 831d9cd4963cf2a8ba2320bbbaafc7ba, type: 3}
+  reddDown: {fileID: -203687184881022635, guid: deebf38a8041ffc5692e2c6f787f72ab, type: 3}
+  reddLeft: {fileID: 1341877325474041833, guid: 8fefabfe358e14b4fb3607aa9322e6f2, type: 3}
+  reddRight: {fileID: -6201019692056567399, guid: 2145b1712d52c535d9ddc1a7d874d342, type: 3}
+  reddWalkUp:
+  - {fileID: 8902085308911056958, guid: 831d9cd4963cf2a8ba2320bbbaafc7ba, type: 3}
+  - {fileID: -2037991182235541006, guid: 831d9cd4963cf2a8ba2320bbbaafc7ba, type: 3}
+  - {fileID: -5717688701713937607, guid: 831d9cd4963cf2a8ba2320bbbaafc7ba, type: 3}
+  - {fileID: 8149656895999264185, guid: 831d9cd4963cf2a8ba2320bbbaafc7ba, type: 3}
+  reddWalkDown:
+  - {fileID: -203687184881022635, guid: deebf38a8041ffc5692e2c6f787f72ab, type: 3}
+  - {fileID: -7218907244574358448, guid: deebf38a8041ffc5692e2c6f787f72ab, type: 3}
+  - {fileID: -8893018721510099259, guid: deebf38a8041ffc5692e2c6f787f72ab, type: 3}
+  - {fileID: 934757917089722312, guid: deebf38a8041ffc5692e2c6f787f72ab, type: 3}
+  reddWalkLeft:
+  - {fileID: 1341877325474041833, guid: 8fefabfe358e14b4fb3607aa9322e6f2, type: 3}
+  - {fileID: 8617113516881055644, guid: 8fefabfe358e14b4fb3607aa9322e6f2, type: 3}
+  - {fileID: 894021525405072162, guid: 8fefabfe358e14b4fb3607aa9322e6f2, type: 3}
+  - {fileID: -9188780799679311936, guid: 8fefabfe358e14b4fb3607aa9322e6f2, type: 3}
+  reddWalkRight:
+  - {fileID: -6201019692056567399, guid: 2145b1712d52c535d9ddc1a7d874d342, type: 3}
+  - {fileID: -7852898016727190981, guid: 2145b1712d52c535d9ddc1a7d874d342, type: 3}
+  - {fileID: 3771676678745289610, guid: 2145b1712d52c535d9ddc1a7d874d342, type: 3}
+  - {fileID: -3566616766442689571, guid: 2145b1712d52c535d9ddc1a7d874d342, type: 3}
+  khalilUp: {fileID: 8902085308911056958, guid: c4eac19fd5618904d9b1ef23f8ade728, type: 3}
+  khalilDown: {fileID: -203687184881022635, guid: 24a6c0e902da6ae1a9f764cdf3c6898a, type: 3}
+  khalilLeft: {fileID: 1341877325474041833, guid: 41d5b355e353fde709f2a819a40581af, type: 3}
+  khalilRight: {fileID: -6201019692056567399, guid: 0e1644573bcd5b2fa9991823085032a0, type: 3}
+  khalilWalkUp:
+  - {fileID: 8902085308911056958, guid: c4eac19fd5618904d9b1ef23f8ade728, type: 3}
+  - {fileID: -2037991182235541006, guid: c4eac19fd5618904d9b1ef23f8ade728, type: 3}
+  - {fileID: -5717688701713937607, guid: c4eac19fd5618904d9b1ef23f8ade728, type: 3}
+  - {fileID: 8149656895999264185, guid: c4eac19fd5618904d9b1ef23f8ade728, type: 3}
+  khalilWalkDown:
+  - {fileID: -203687184881022635, guid: 24a6c0e902da6ae1a9f764cdf3c6898a, type: 3}
+  - {fileID: -7218907244574358448, guid: 24a6c0e902da6ae1a9f764cdf3c6898a, type: 3}
+  - {fileID: -8893018721510099259, guid: 24a6c0e902da6ae1a9f764cdf3c6898a, type: 3}
+  - {fileID: 934757917089722312, guid: 24a6c0e902da6ae1a9f764cdf3c6898a, type: 3}
+  khalilWalkLeft:
+  - {fileID: 1341877325474041833, guid: 41d5b355e353fde709f2a819a40581af, type: 3}
+  - {fileID: 8617113516881055644, guid: 41d5b355e353fde709f2a819a40581af, type: 3}
+  - {fileID: 894021525405072162, guid: 41d5b355e353fde709f2a819a40581af, type: 3}
+  - {fileID: -9188780799679311936, guid: 41d5b355e353fde709f2a819a40581af, type: 3}
+  khalilWalkRight:
+  - {fileID: -6201019692056567399, guid: 0e1644573bcd5b2fa9991823085032a0, type: 3}
+  - {fileID: -7852898016727190981, guid: 0e1644573bcd5b2fa9991823085032a0, type: 3}
+  - {fileID: 3771676678745289610, guid: 0e1644573bcd5b2fa9991823085032a0, type: 3}
+  - {fileID: -3566616766442689571, guid: 0e1644573bcd5b2fa9991823085032a0, type: 3}
   elloUp: {fileID: 0}
   elloDown: {fileID: 0}
   elloLeft: {fileID: 0}
   elloRight: {fileID: 0}
+  elloWalkUp: []
+  elloWalkDown: []
+  elloWalkLeft: []
+  elloWalkRight: []
   jadeUp: {fileID: 0}
   jadeDown: {fileID: 0}
   jadeLeft: {fileID: 0}
   jadeRight: {fileID: 0}
+  jadeWalkUp: []
+  jadeWalkDown: []
+  jadeWalkLeft: []
+  jadeWalkRight: []
   bleuUp: {fileID: 0}
   bleuDown: {fileID: 0}
   bleuLeft: {fileID: 0}
   bleuRight: {fileID: 0}
+  bleuWalkUp: []
+  bleuWalkDown: []
+  bleuWalkLeft: []
+  bleuWalkRight: []
   lilaUp: {fileID: 0}
   lilaDown: {fileID: 0}
   lilaLeft: {fileID: 0}
   lilaRight: {fileID: 0}
+  lilaWalkUp: []
+  lilaWalkDown: []
+  lilaWalkLeft: []
+  lilaWalkRight: []
   elloScale: 0.5
 --- !u!114 &16486282
 MonoBehaviour:
@@ -74562,7 +74618,7 @@ Transform:
   m_GameObject: {fileID: 519420028}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -58.88, y: -31.03, z: -10}
+  m_LocalPosition: {x: 4.7, y: -44.9, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -75442,7 +75498,7 @@ Transform:
   m_GameObject: {fileID: 653535209}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -58.88, y: -31.03, z: -10}
+  m_LocalPosition: {x: 4.7, y: -44.9, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -82796,7 +82852,7 @@ Transform:
   m_GameObject: {fileID: 1463245910}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -58.88, y: -31.03, z: -10}
+  m_LocalPosition: {x: 4.7, y: -44.9, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
