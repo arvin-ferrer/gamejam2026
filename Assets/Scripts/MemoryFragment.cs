@@ -35,6 +35,8 @@ public class MemoryFragment : MonoBehaviour
                     pm.TransformTo(MemoryState.Personality.Ello);
                 else if (memoryName == "Jade")
                     pm.TransformTo(MemoryState.Personality.Jade);
+                else if (memoryName == "Bleu")
+                    pm.TransformTo(MemoryState.Personality.Bleu);
             }
 
             // Keep your Unity 6 MemoryManager logic here if needed
@@ -92,8 +94,19 @@ public class MemoryFragment : MonoBehaviour
                 "Jade always said the answer was never force.",
                 "Sometimes you just need to be small enough to see it.",
                 "Memory Unlocked: Jade.",
-                "Ability Obtained: Shrink — You can now fit through small gaps.",
-                "Press [4] to transform into Jade."
+                "Ability Obtained: Jade Sight — Reveal hidden objects nearby.",
+                "Press [4] to transform into Jade. Press [F] to activate Jade Sight."
+            };
+            dm.ShowMemory(story);
+        }
+        else if (memoryName == "Bleu")
+        {
+            string[] story = {
+                "The darkness... I couldn't see anything.",
+                "But Bleu was there. A calm light in the void.",
+                "He showed me that even shadows have a shape.",
+                "Memory Unlocked: Bleu.",
+                "Press [5] to transform into Bleu."
             };
             dm.ShowMemory(story);
         }

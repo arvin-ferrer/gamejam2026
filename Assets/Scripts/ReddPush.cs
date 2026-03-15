@@ -28,7 +28,7 @@ public class ReddPush : MonoBehaviour
 
     private void OnCollisionStay2D(Collision2D collision)
         {
-            if (MemoryState.Instance.currentPersonality != MemoryState.Personality.Redd) return;
+            if (MemoryState.Instance == null || MemoryState.Instance.currentPersonality != MemoryState.Personality.Redd) return;
 
             if (collision.gameObject.CompareTag("Pushable"))
             {
