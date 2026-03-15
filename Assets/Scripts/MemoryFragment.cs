@@ -33,6 +33,8 @@ public class MemoryFragment : MonoBehaviour
                     pm.TransformTo(MemoryState.Personality.Khalil);
                 else if (memoryName == "Ello")
                     pm.TransformTo(MemoryState.Personality.Ello);
+                else if (memoryName == "Jade")
+                    pm.TransformTo(MemoryState.Personality.Jade);
             }
 
             // Keep your Unity 6 MemoryManager logic here if needed
@@ -71,6 +73,15 @@ public class MemoryFragment : MonoBehaviour
             string[] story = {
                 "Ello...",
                 "A bright spark of joy."
+            };
+            dm.ShowMemory(story);
+        }
+        else if (memoryName == "Jade")
+        {
+            string[] story = {
+                "The weight of the stones... the silence of the room.",
+                "Jade always said the answer was never force.",
+                "Sometimes you just need to be small enough to see it."
             };
             dm.ShowMemory(story);
         }

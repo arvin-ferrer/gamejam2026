@@ -7,8 +7,19 @@ public class PersonalityManager : MonoBehaviour
     [Header("Personality Colors")]
     public Color defaultColor = Color.white;
     public Color reddColor = Color.red;
-    public Color khalilColor = Color.green; // Added Khalil
-    public Color elloColor = Color.yellow; // Example for future Ello
+    public Color khalilColor = Color.green;
+    public Color elloColor = Color.yellow;
+    public Color jadeColor = new Color(0f, 0.8f, 0.6f); // Teal/jade
+
+    [Header("Ello Shrink Settings")]
+    public float elloScale = 0.5f; // How small Ello becomes (50%)
+    private Vector3 originalScale;
+    private bool isShrunk = false;
+
+    void Start()
+    {
+        originalScale = transform.localScale;
+    }
 
     void Update()
     {
@@ -16,6 +27,7 @@ public class PersonalityManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Alpha1)) AttemptTransformation("Redd");
         if (Input.GetKeyDown(KeyCode.Alpha2)) AttemptTransformation("Khalil");
         if (Input.GetKeyDown(KeyCode.Alpha3)) AttemptTransformation("Ello");
+        if (Input.GetKeyDown(KeyCode.Alpha4)) AttemptTransformation("Jade");
         
         if (Input.GetKeyDown(KeyCode.Alpha0))
         {
@@ -33,6 +45,7 @@ public class PersonalityManager : MonoBehaviour
             case "redd": isUnlocked = MemoryState.Instance.reddUnlocked; break;
             case "khalil": isUnlocked = MemoryState.Instance.khalilUnlocked; break;
             case "ello": isUnlocked = MemoryState.Instance.elloUnlocked; break;
+            case "jade": isUnlocked = MemoryState.Instance.jadeUnlocked; break;
         }
 
         if (isUnlocked)
@@ -51,6 +64,18 @@ public class PersonalityManager : MonoBehaviour
     {
         MemoryState.Instance.currentPersonality = newForm;
 
+        // Handle Ello's shrink: shrink when becoming Ello, restore otherwise
+        if (newForm == MemoryState.Personality.Ello)
+        {
+            transform.localScale = originalScale * elloScale;
+            isShrunk = true;
+        }
+        else if (isShrunk)
+        {
+            transform.localScale = originalScale;
+            isShrunk = false;
+        }
+
         // Apply the visual changes based on the state
         switch (newForm)
         {
@@ -62,6 +87,9 @@ public class PersonalityManager : MonoBehaviour
                 break;
             case MemoryState.Personality.Ello:
                 playerSprite.color = elloColor;
+                break;
+            case MemoryState.Personality.Jade:
+                playerSprite.color = jadeColor;
                 break;
             case MemoryState.Personality.None:
                 playerSprite.color = defaultColor;
