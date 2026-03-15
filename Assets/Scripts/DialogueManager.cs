@@ -18,6 +18,7 @@ public class DialogueManager : MonoBehaviour
     private string[] currentStory;
     private int currentIndex = 0;
     private bool isTyping = false; // Prevents skipping while typing
+    private System.Action onDialogueComplete;
 
     void Start()
     {
@@ -26,12 +27,13 @@ public class DialogueManager : MonoBehaviour
         if (interactPrompt != null) interactPrompt.SetActive(false);
     }
 
-    public void ShowMemory(string[] storyLines)
+    public void ShowMemory(string[] storyLines, System.Action onComplete = null)
     {
         if (dialogueBox != null)
         {
             currentStory = storyLines;
             currentIndex = 0;
+            onDialogueComplete = onComplete;
             dialogueBox.SetActive(true);
             
             // Hide prompts when starting a new dialogue
@@ -73,6 +75,13 @@ public class DialogueManager : MonoBehaviour
         dialogueBox.SetActive(false);
         if (spacePrompt != null) spacePrompt.SetActive(false);
         Time.timeScale = 1f; 
+
+        if (onDialogueComplete != null)
+        {
+            var temp = onDialogueComplete;
+            onDialogueComplete = null;
+            temp.Invoke();
+        }
     }
 
     // Call this from scripts like 'ReadableNote' when player enters/exits trigger

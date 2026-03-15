@@ -38,4 +38,9 @@ public class MemoryState : MonoBehaviour
         }
         Debug.Log($"Memory Unlocked: {memoryName}");
     }
+
+    public bool AllMemoriesUnlocked()
+    {
+        return reddUnlocked && khalilUnlocked && elloUnlocked && jadeUnlocked && bleuUnlocked && lilaUnlocked;
+    }
 }

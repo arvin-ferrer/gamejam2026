@@ -1,10 +1,19 @@
 fileFormatVersion: 2
-guid: 7559ba3b81f8195f1a156388fd8f8f55
+guid: 67f6fa7f42c088f51ab672c5dfb121f3
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 9040879190431018056
-    second: Front_0
+      213: -9213597251467734353
+    second: Bleu_Left_0
+  - first:
+      213: -8324442379409793751
+    second: Bleu_Left_1
+  - first:
+      213: 7483015465259071675
+    second: Bleu_Left_2
+  - first:
+      213: -3561179877943461403
+    second: Bleu_Left_3
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,23 +122,89 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Front_0
+      name: Bleu_Left_0
       rect:
         serializedVersion: 2
-        x: 312
-        y: 195
-        width: 456
-        height: 691
+        x: 63
+        y: 271
+        width: 125
+        height: 203
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 84cacda19b7a77d70800000000000000
-      internalID: 9040879190431018056
+      spriteID: fa210c29d1ab22080800000000000000
+      internalID: -9213597251467734353
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bleu_Left_1
+      rect:
+        serializedVersion: 2
+        x: 67
+        y: 24
+        width: 117
+        height: 210
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 92d521eb2c3a97c80800000000000000
+      internalID: -8324442379409793751
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bleu_Left_2
+      rect:
+        serializedVersion: 2
+        x: 312
+        y: 20
+        width: 121
+        height: 213
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bb8758f3be209d760800000000000000
+      internalID: 7483015465259071675
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bleu_Left_3
+      rect:
+        serializedVersion: 2
+        x: 308
+        y: 269
+        width: 128
+        height: 204
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5e939e9d4c5249ec0800000000000000
+      internalID: -3561179877943461403
       vertices: []
       indices: 
       edges: []
@@ -138,7 +213,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 5e10b951bb863c35fa4be9cd05800279
     internalID: 0
     vertices: []
     indices: 
@@ -148,7 +223,10 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Front_0: 9040879190431018056
+      Bleu_Left_0: -9213597251467734353
+      Bleu_Left_1: -8324442379409793751
+      Bleu_Left_2: 7483015465259071675
+      Bleu_Left_3: -3561179877943461403
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

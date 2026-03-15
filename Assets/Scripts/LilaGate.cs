@@ -3,7 +3,7 @@ using UnityEngine;
 public class LilaGate : MonoBehaviour
 {
     [Header("Settings")]
-    public string requiredKey = "Lila"; // Matches the 'keyName' on the Lila Key
+    public string requiredKey = "Lila"; 
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -24,7 +24,13 @@ public class LilaGate : MonoBehaviour
     void OpenGate()
     {
         Debug.Log("Lila's path is open!");
-        // Destroy the gate so the player can proceed
+
+        // --- PLAY SOUND ---
+        if (AudioManager.Instance != null)
+        {
+            AudioManager.Instance.PlaySFX(AudioManager.Instance.gateOpenSound);
+        }
+
         Destroy(gameObject); 
     }
 }

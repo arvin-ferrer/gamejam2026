@@ -3,20 +3,18 @@ using UnityEngine;
 public class ElloGate : MonoBehaviour
 {
     [Header("Settings")]
-    public string requiredKey = "Ello"; // Matches the 'keyName' on your Ello Key
+    public string requiredKey = "Ello"; 
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnCollisionEnter2D(Collider2D other) // Use Trigger if the gate is a trigger, or Collision if it's solid
     {
-        if (collision.gameObject.CompareTag("Player"))
+        if (other.gameObject.CompareTag("Player"))
         {
-            // Reusing the PlayerInventory logic
             if (PlayerInventory.Instance.HasKey(requiredKey))
             {
                 OpenGate();
             }
             else
             {
-                // Trigger the dialogue hint instead of a keypad
                 string[] hint = { "This gate requires the " + requiredKey + " key found within the ruins." };
                 Object.FindFirstObjectByType<DialogueManager>().ShowMemory(hint);
             }
@@ -26,9 +24,13 @@ public class ElloGate : MonoBehaviour
     void OpenGate()
     {
         Debug.Log("Ello's path is open!");
-        // You can play a 'gate opening' sound here
+
+        // --- THE MAGIC LINE ---
+        if (AudioManager.Instance != null)
+        {
+            AudioManager.Instance.PlaySFX(AudioManager.Instance.gateOpenSound);
+        }
         
-        // Destroy the gate so the player can proceed
         Destroy(gameObject); 
     }
 }

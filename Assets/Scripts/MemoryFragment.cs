@@ -1,4 +1,6 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using System.Collections.Generic;
 
 public class MemoryFragment : MonoBehaviour
 {
@@ -43,7 +45,7 @@ public class MemoryFragment : MonoBehaviour
 
             // Keep your Unity 6 MemoryManager logic here if needed
             MemoryManager mm = FindFirstObjectByType<MemoryManager>();
-            if (mm != null && memoryName == "Redd") mm.RestoreRedMemory();
+            if (mm != null && MemoryState.Instance.AllMemoriesUnlocked()) mm.RestoreRedMemory();
 
             Destroy(gameObject);
         }
@@ -56,72 +58,93 @@ public class MemoryFragment : MonoBehaviour
             return;
         }
 
+        List<string> storyList = new List<string>();
+
         if (memoryName == "Redd")
         {
-            string[] story = {
+            storyList.AddRange(new string[] {
                 "I remember the forest... it was cold and quiet.",
                 "Redd. He chose to walk beside me.",
                 "Memory Unlocked: Redd.",
                 "Ability Obtained: Push — You can now move heavy objects.",
                 "Press [1] to transform into Redd."
-            };
-            dm.ShowMemory(story);
+            });
         }
         else if (memoryName == "Khalil")
         {
-            string[] story = {
+            storyList.AddRange(new string[] {
                 "The maze... Khalil knew every turn.",
                 "He spoke of patience when I only felt panic.",
                 "Memory Unlocked: Khalil.",
                 "Ability Obtained: Dash — You can now dash through obstacles.",
                 "Press [2] to transform into Khalil. Hold [Shift] to dash."
-            };
-            dm.ShowMemory(story);
+            });
         }
         else if (memoryName == "Ello")
         {
-            string[] story = {
+            storyList.AddRange(new string[] {
                 "Ello...",
                 "A bright spark of joy.",
                 "Memory Unlocked: Ello.",
                 "Ability Obtained: Shrink — You can now fit through narrow gaps.",
                 "Press [3] to transform into Ello."
-            };
-            dm.ShowMemory(story);
+            });
         }
         else if (memoryName == "Jade")
         {
-            string[] story = {
+            storyList.AddRange(new string[] {
                 "The weight of the stones... the silence of the room.",
                 "Jade always said the answer was never force.",
                 "Sometimes you just need to be small enough to see it.",
                 "Memory Unlocked: Jade.",
                 "Ability Obtained: Jade Sight — Reveal hidden objects nearby.",
                 "Press [4] to transform into Jade. Press [F] to activate Jade Sight."
-            };
-            dm.ShowMemory(story);
+            });
         }
         else if (memoryName == "Bleu")
         {
-            string[] story = {
+            storyList.AddRange(new string[] {
                 "The darkness... I couldn't see anything.",
                 "But Bleu was there. A calm light in the void.",
                 "He showed me that even shadows have a shape.",
                 "Memory Unlocked: Bleu.",
                 "Press [5] to transform into Bleu."
-            };
-            dm.ShowMemory(story);
+            });
         }
         else if (memoryName == "Lila")
         {
-            string[] story = {
+            storyList.AddRange(new string[] {
                 "Lila...",
                 "The gentle breeze and the smell of lavender.",
                 "Memory Unlocked: Lila.",
                 "Press [6] to transform into Lila."
-            };
-            dm.ShowMemory(story);
+            });
         }
 
-}
+        if (MemoryState.Instance.AllMemoriesUnlocked())
+        {
+            storyList.AddRange(new string[] {
+                "The protagonist understands their past.",
+                "The world fully regains its color.",
+                "The forest is no longer empty or silent.",
+                "Memories can bring pain, but they are also what give life its color."
+            });
+
+            dm.ShowMemory(storyList.ToArray(), () => {
+                MemoryManager mm = FindFirstObjectByType<MemoryManager>();
+                if (mm != null)
+                {
+                    mm.ShowRestartPrompt();
+                }
+                else
+                {
+                    SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+                }
+            });
+        }
+        else
+        {
+            dm.ShowMemory(storyList.ToArray());
+        }
+    }
 }

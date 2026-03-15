@@ -1,10 +1,19 @@
 fileFormatVersion: 2
-guid: 5c5d82e8b154a71fa8a38c40c5901fd5
+guid: dbb58411227aaa1b3a0c21aaccd541ea
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -203687184881022635
-    second: WalkFront_0
+      213: -5200422259039759585
+    second: Jade_Front_0
+  - first:
+      213: 6333173092948502200
+    second: Jade_Front_1
+  - first:
+      213: -7067685142747941524
+    second: Jade_Front_2
+  - first:
+      213: 6853904869152636799
+    second: Jade_Front_3
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,23 +122,89 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: WalkFront_0
+      name: Jade_Front_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 640
-        height: 640
+        x: 59
+        y: 260
+        width: 146
+        height: 197
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 5590ed3a59b5c2df0800000000000000
-      internalID: -203687184881022635
+      spriteID: f1396e7228364d7b0800000000000000
+      internalID: -5200422259039759585
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Jade_Front_1
+      rect:
+        serializedVersion: 2
+        x: 302
+        y: 258
+        width: 149
+        height: 196
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8b6e14a9f53f3e750800000000000000
+      internalID: 6333173092948502200
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Jade_Front_2
+      rect:
+        serializedVersion: 2
+        x: 66
+        y: 41
+        width: 126
+        height: 192
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c65f3321fc98aed90800000000000000
+      internalID: -7067685142747941524
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Jade_Front_3
+      rect:
+        serializedVersion: 2
+        x: 311
+        y: 41
+        width: 131
+        height: 193
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f7fb92a3a26fd1f50800000000000000
+      internalID: 6853904869152636799
       vertices: []
       indices: 
       edges: []
@@ -138,7 +213,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 9cca7a526cfb5a9d0b0d54a8951bea24
     internalID: 0
     vertices: []
     indices: 
@@ -148,7 +223,10 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      WalkFront_0: -203687184881022635
+      Jade_Front_0: -5200422259039759585
+      Jade_Front_1: 6333173092948502200
+      Jade_Front_2: -7067685142747941524
+      Jade_Front_3: 6853904869152636799
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

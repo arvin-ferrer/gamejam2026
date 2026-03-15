@@ -19,7 +19,7 @@ public class MemoryManager : MonoBehaviour
     public void RestoreRedMemory()
     {
         StartCoroutine(FadeSaturation(0f, 2f));
-        Debug.Log("Red Memory Processed by Manager!");
+        Debug.Log("All Memories Processed by Manager!");
     }
 
     IEnumerator FadeSaturation(float targetValue, float duration)
@@ -29,7 +29,7 @@ public class MemoryManager : MonoBehaviour
 
         while (elapsed < duration)
         {
-            elapsed += Time.deltaTime;
+            elapsed += Time.unscaledDeltaTime;
             float newValue = Mathf.Lerp(startValue, targetValue, elapsed / duration);
             
             colorAdjustments.saturation.Override(newValue);
@@ -39,5 +39,24 @@ public class MemoryManager : MonoBehaviour
         
         colorAdjustments.saturation.Override(targetValue);
         Debug.Log("Color fully restored!");
+    }
+
+    public void ShowRestartPrompt()
+    {
+        StartCoroutine(WaitAndPromptRestartCoroutine());
+    }
+
+    IEnumerator WaitAndPromptRestartCoroutine()
+    {
+        // Wait 3 seconds in real time to let the color fade finish and be admired
+        yield return new WaitForSecondsRealtime(3f);
+        
+        DialogueManager dm = FindFirstObjectByType<DialogueManager>();
+        if (dm != null)
+        {
+            dm.ShowMemory(new string[] { "Would you like to try again?", "Press [Space] to restart." }, () => {
+                UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex);
+            });
+        }
     }
 }

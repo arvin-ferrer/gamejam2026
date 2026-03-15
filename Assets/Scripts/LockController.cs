@@ -29,6 +29,14 @@ public class LockController : MonoBehaviour
     public void OnCodeCorrect()
     {
         Debug.Log("Lock Disengaged!");
+        
+        // --- ADDED AUDIO CALL ---
+        if (AudioManager.Instance != null)
+        {
+            AudioManager.Instance.PlaySFX(AudioManager.Instance.gateOpenSound);
+        }
+        // -------------------------
+
         Time.timeScale = 1f;
         keypadUI.SetActive(false);
         
