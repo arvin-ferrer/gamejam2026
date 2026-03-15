@@ -56,15 +56,21 @@ public class MemoryFragment : MonoBehaviour
         {
             string[] story = {
                 "I remember the forest... it was cold and quiet.",
-                "Redd. He chose to walk beside me."
+                "Redd. He chose to walk beside me.",
+                "Memory Unlocked: Redd.",
+                "Ability Obtained: Push — You can now move heavy objects.",
+                "Press [1] to transform into Redd."
             };
             dm.ShowMemory(story);
         }
-        else if (memoryName == "Khalil") // Add this block
+        else if (memoryName == "Khalil")
         {
             string[] story = {
                 "The maze... Khalil knew every turn.",
-                "He spoke of patience when I only felt panic."
+                "He spoke of patience when I only felt panic.",
+                "Memory Unlocked: Khalil.",
+                "Ability Obtained: Dash — You can now dash through obstacles.",
+                "Press [2] to transform into Khalil. Hold [Shift] to dash."
             };
             dm.ShowMemory(story);
         }
@@ -72,7 +78,10 @@ public class MemoryFragment : MonoBehaviour
         {
             string[] story = {
                 "Ello...",
-                "A bright spark of joy."
+                "A bright spark of joy.",
+                "Memory Unlocked: Ello.",
+                "Ability Obtained: Shrink — You can now fit through narrow gaps.",
+                "Press [3] to transform into Ello."
             };
             dm.ShowMemory(story);
         }
@@ -81,7 +90,10 @@ public class MemoryFragment : MonoBehaviour
             string[] story = {
                 "The weight of the stones... the silence of the room.",
                 "Jade always said the answer was never force.",
-                "Sometimes you just need to be small enough to see it."
+                "Sometimes you just need to be small enough to see it.",
+                "Memory Unlocked: Jade.",
+                "Ability Obtained: Shrink — You can now fit through small gaps.",
+                "Press [4] to transform into Jade."
             };
             dm.ShowMemory(story);
         }
