@@ -11,6 +11,7 @@ public class PersonalityManager : MonoBehaviour
     public Color elloColor = Color.yellow;
     public Color jadeColor = new Color(0f, 0.8f, 0.6f); // Teal/jade
     public Color bleuColor = new Color(0.2f, 0.4f, 1f);  // Deep blue
+    public Color lilaColor = new Color(0.8f, 0.3f, 0.8f); // Purple/Lila
 
     [Header("Ello Shrink Settings")]
     public float elloScale = 0.5f; // How small Ello becomes (50%)
@@ -30,6 +31,7 @@ public class PersonalityManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Alpha3)) AttemptTransformation("Ello");
         if (Input.GetKeyDown(KeyCode.Alpha4)) AttemptTransformation("Jade");
         if (Input.GetKeyDown(KeyCode.Alpha5)) AttemptTransformation("Bleu");
+        if (Input.GetKeyDown(KeyCode.Alpha6)) AttemptTransformation("Lila");
         
         if (Input.GetKeyDown(KeyCode.Alpha0))
         {
@@ -50,6 +52,7 @@ public class PersonalityManager : MonoBehaviour
             case "ello": isUnlocked = MemoryState.Instance.elloUnlocked; break;
             case "jade": isUnlocked = MemoryState.Instance.jadeUnlocked; break;
             case "bleu": isUnlocked = MemoryState.Instance.bleuUnlocked; break;
+            case "lila": isUnlocked = MemoryState.Instance.lilaUnlocked; break;
         }
 
         if (isUnlocked)
@@ -98,6 +101,9 @@ public class PersonalityManager : MonoBehaviour
                 break;
             case MemoryState.Personality.Bleu:
                 playerSprite.color = bleuColor;
+                break;
+            case MemoryState.Personality.Lila:
+                playerSprite.color = lilaColor;
                 break;
             case MemoryState.Personality.None:
                 playerSprite.color = defaultColor;
