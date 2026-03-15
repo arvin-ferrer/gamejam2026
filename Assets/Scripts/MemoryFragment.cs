@@ -37,6 +37,8 @@ public class MemoryFragment : MonoBehaviour
                     pm.TransformTo(MemoryState.Personality.Jade);
                 else if (memoryName == "Bleu")
                     pm.TransformTo(MemoryState.Personality.Bleu);
+                else if (memoryName == "Lila")
+                    pm.TransformTo(MemoryState.Personality.Lila);
             }
 
             // Keep your Unity 6 MemoryManager logic here if needed
@@ -107,6 +109,16 @@ public class MemoryFragment : MonoBehaviour
                 "He showed me that even shadows have a shape.",
                 "Memory Unlocked: Bleu.",
                 "Press [5] to transform into Bleu."
+            };
+            dm.ShowMemory(story);
+        }
+        else if (memoryName == "Lila")
+        {
+            string[] story = {
+                "Lila...",
+                "The gentle breeze and the smell of lavender.",
+                "Memory Unlocked: Lila.",
+                "Press [6] to transform into Lila."
             };
             dm.ShowMemory(story);
         }
